@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.monjasa.carfactory.controller.MainSceneController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox alignment="CENTER">
+        <Label fx:id="weatherLabel" />
+        <Slider fx:id="speedSlider" blockIncrement="1" cache="true" majorTickUnit="1" minorTickCount="0" min="1" max="10" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+        <Button onAction="#resetSpeed">Reset speed</Button>
+    </VBox>
+</AnchorPane>

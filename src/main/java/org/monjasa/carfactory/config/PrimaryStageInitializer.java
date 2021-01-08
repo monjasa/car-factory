@@ -1,0 +1,25 @@
+package org.monjasa.carfactory.config;
+
+import org.monjasa.carfactory.controller.MainSceneController;
+import org.monjasa.carfactory.event.StageReadyEvent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import lombok.RequiredArgsConstructor;
+import net.rgielen.fxweaver.core.FxWeaver;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class PrimaryStageInitializer implements ApplicationListener<StageReadyEvent> {
+
+    private final FxWeaver fxWeaver;
+
+    @Override
+    public void onApplicationEvent(StageReadyEvent event) {
+        Stage stage = event.stage;
+        Scene mainScene = new Scene(fxWeaver.loadView(MainSceneController.class), 400, 300);
+        stage.setScene(mainScene);
+        stage.show();
+    }
+}
