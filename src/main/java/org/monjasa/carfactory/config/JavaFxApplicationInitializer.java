@@ -1,10 +1,10 @@
 package org.monjasa.carfactory.config;
 
-import org.monjasa.carfactory.CarFactoryApplication;
-import org.monjasa.carfactory.event.StageReadyEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import org.monjasa.carfactory.CarFactoryApplication;
+import org.monjasa.carfactory.event.StageReadyEvent;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 

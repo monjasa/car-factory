@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "name": "storage-capacity.engine",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "storage-capacity.body",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "storage-capacity.accessories",
+      "type": "java.lang.Integer"
+    }
+  ]
+}

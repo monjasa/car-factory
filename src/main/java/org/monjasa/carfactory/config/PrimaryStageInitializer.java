@@ -1,11 +1,11 @@
 package org.monjasa.carfactory.config;
 
-import org.monjasa.carfactory.controller.MainSceneController;
-import org.monjasa.carfactory.event.StageReadyEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import net.rgielen.fxweaver.core.FxWeaver;
+import org.monjasa.carfactory.controller.MainSceneController;
+import org.monjasa.carfactory.event.StageReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 

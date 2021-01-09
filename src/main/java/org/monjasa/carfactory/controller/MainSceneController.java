@@ -1,12 +1,12 @@
 package org.monjasa.carfactory.controller;
 
-import org.monjasa.carfactory.service.SpeedService;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import lombok.RequiredArgsConstructor;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.monjasa.carfactory.service.MainService;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,17 +14,20 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MainSceneController {
 
-    private final SpeedService speedService;
+    private final MainService mainService;
 
-    @FXML private Slider speedSlider;
-    @FXML private Label weatherLabel;
+    @FXML
+    private Label queueSizeLabel;
 
     public void initialize() {
-        speedSlider.valueProperty().bindBidirectional(speedService.getSpeed().getSpeedProperty());
-        weatherLabel.textProperty().bind(speedService.getSpeed().getSpeedProperty().asString());
+        queueSizeLabel.textProperty().bind(
+                Bindings.size(mainService.loadMainModel().getObservableBlockingQueue()).asString()
+                        .concat(" / ")
+                        .concat(String.valueOf(mainService.getEngineStorageCapacity()))
+        );
     }
 
-    public void resetSpeed(ActionEvent actionEvent) {
-        speedSlider.setValue(3);
+    public void handleClick(ActionEvent actionEvent) {
+
     }
 }
