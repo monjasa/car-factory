@@ -35,6 +35,10 @@
     {
       "name": "constructors.construction-time",
       "type": "java.lang.Integer"
+    },
+    {
+      "name": "dealers.count",
+      "type": "java.lang.Integer"
     }
   ]
 }

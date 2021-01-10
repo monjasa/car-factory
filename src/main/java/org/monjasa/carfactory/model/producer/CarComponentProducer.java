@@ -4,22 +4,25 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.monjasa.carfactory.domain.CarComponent;
 import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
 import org.monjasa.carfactory.model.warehouse.ScheduledWarehouse;
-import org.monjasa.carfactory.service.factory.CarComponentFactory;
+import org.monjasa.carfactory.service.component.CarComponentFactory;
 
 import java.util.concurrent.TimeUnit;
 
-@Data
+@RequiredArgsConstructor
 public class CarComponentProducer<T extends CarComponent> {
 
-    @NonNull private CarComponentFactory<T> carComponentFactory;
-    @NonNull private ProductWarehouse<T> carComponentWarehouse;
+    @NonNull private final CarComponentFactory<T> carComponentFactory;
+    @NonNull private final ProductWarehouse<T> carComponentWarehouse;
 
-    private DoubleProperty producingRate = new SimpleDoubleProperty(1.0);
+    private final DoubleProperty producingRate = new SimpleDoubleProperty(1.0);
 
     public void startProducing() {
+
+        final ScheduledWarehouse scheduledWarehouse = (ScheduledWarehouse) CarComponentProducer.this.carComponentWarehouse;
 
         Runnable producingTask = new Runnable() {
             @Override
@@ -29,11 +32,15 @@ public class CarComponentProducer<T extends CarComponent> {
                 } catch (InterruptedException exception) {
                     exception.printStackTrace();
                 } finally {
-                    ((ScheduledWarehouse) carComponentWarehouse).scheduleWarehouseTask(this, producingRate.multiply(1000).longValue(), TimeUnit.MILLISECONDS);
+                    scheduledWarehouse.scheduleWarehouseTask(this, producingRate.multiply(1000).longValue(), TimeUnit.MILLISECONDS);
                 }
             }
         };
 
-        ((ScheduledWarehouse) carComponentWarehouse).scheduleWarehouseTask(producingTask, producingRate.multiply(1000).longValue(), TimeUnit.MILLISECONDS);
+        scheduledWarehouse.scheduleWarehouseTask(producingTask, producingRate.multiply(1000).longValue(), TimeUnit.MILLISECONDS);
+    }
+
+    public DoubleProperty producingRateProperty() {
+        return producingRate;
     }
 }

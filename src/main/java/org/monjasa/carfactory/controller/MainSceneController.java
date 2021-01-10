@@ -7,9 +7,11 @@ import javafx.scene.control.Slider;
 import lombok.RequiredArgsConstructor;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.monjasa.carfactory.domain.Car;
+import org.monjasa.carfactory.domain.CarComponent;
 import org.monjasa.carfactory.model.*;
 import org.monjasa.carfactory.model.warehouse.AuditableWarehouse;
 import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
+import org.monjasa.carfactory.service.facility.AbstractFacilityFactory;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Component;
 public class MainSceneController {
 
     private final CarComponentProducersModel carComponentProducersModel;
+    private final CarDealersModel carDealersModel;
     private final CarPlantModel carPlantModel;
 
     @FXML private Label carEngineWarehouseState;
@@ -37,43 +40,49 @@ public class MainSceneController {
 
     @FXML private Label waitingCarCreationTasksCount;
 
-    private void setupProducingInfo(ProductWarehouse<?> productWarehouse, Label warehouseState, Label warehouseTotal, Slider slider) {
+    @FXML private Slider carRequestingRate;
+
+    private void setupProducingInfo(
+            AbstractFacilityFactory<? extends CarComponent> facilityFactory,
+            Label warehouseState,
+            Label warehouseTotal,
+            Slider slider
+    ) {
 
         warehouseState.textProperty().bind(
-                productWarehouse.sizeBinding().asString()
+                facilityFactory.getProductWarehouse().sizeBinding().asString()
                         .concat(" / ")
-                        .concat(productWarehouse.capacityProperty().asString())
+                        .concat(facilityFactory.getProductWarehouse().capacityProperty().asString())
         );
 
+        AuditableWarehouse auditableWarehouse = (AuditableWarehouse) facilityFactory.getProductWarehouse();
         warehouseTotal.textProperty().bind(
                 new SimpleStringProperty("Total: ")
-                        .concat(((AuditableWarehouse) productWarehouse).auditSizeBinding().asString())
+                        .concat(auditableWarehouse.auditSizeBinding().asString())
         );
 
-        carComponentProducersModel.getCarComponentProducers().stream()
-                .filter(carComponentProducer -> carComponentProducer.getCarComponentWarehouse() == productWarehouse)
-                .forEach(carComponentProducer -> carComponentProducer.getProducingRate().bind(slider.valueProperty()));
-
+        facilityFactory.getCarComponentProducers()
+                .forEach(carComponentProducer -> carComponentProducer.producingRateProperty().bind(slider.valueProperty()));
     }
 
     public void initialize() {
 
         setupProducingInfo(
-                carComponentProducersModel.getCarEngineWarehouse(),
+                carComponentProducersModel.getCarEngineFacilityFactory(),
                 carEngineWarehouseState,
                 carEngineWarehouseTotal,
                 carEngineProducingRate
         );
 
         setupProducingInfo(
-                carComponentProducersModel.getCarBodyWarehouse(),
+                carComponentProducersModel.getCarBodyFacilityFactory(),
                 carBodyWarehouseState,
                 carBodyWarehouseTotal,
                 carBodyProducingRate
         );
 
         setupProducingInfo(
-                carComponentProducersModel.getCarAccessoryWarehouse(),
+                carComponentProducersModel.getCarAccessoryFacilityFactory(),
                 carAccessoryWarehouseState,
                 carAccessoryWarehouseTotal,
                 carAccessoryProducingRate
@@ -95,5 +104,7 @@ public class MainSceneController {
                 new SimpleStringProperty("Waiting: +")
                         .concat(carPlantModel.getWaitingTaskCount().asString())
         );
+
+        carDealersModel.getCarDealers().forEach(carDealer -> carDealer.requestingRateProperty().bind(carRequestingRate.valueProperty()));
     }
 }

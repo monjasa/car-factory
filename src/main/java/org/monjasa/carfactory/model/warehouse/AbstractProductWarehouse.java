@@ -6,6 +6,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
+import lombok.Getter;
 import org.monjasa.carfactory.domain.Product;
 import org.monjasa.carfactory.util.ObservableBlockingQueue;
 

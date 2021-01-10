@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class PrimaryStageInitializer implements ApplicationListener<StageReadyEvent> {
+public final class PrimaryStageInitializer implements ApplicationListener<StageReadyEvent> {
 
     private final FxWeaver fxWeaver;
 
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
         Stage stage = event.stage;
-        Scene mainScene = new Scene(fxWeaver.loadView(MainSceneController.class), 400, 300);
+        Scene mainScene = new Scene(fxWeaver.loadView(MainSceneController.class), 600, 350);
         stage.setScene(mainScene);
         stage.show();
     }

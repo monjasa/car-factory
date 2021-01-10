@@ -9,7 +9,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.monjasa.carfactory.controller.MainSceneController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="400.0" prefWidth="800.0">
 
     <HBox>
         <VBox>
@@ -53,6 +53,14 @@
             <Label text="Car Warehouse" />
             <Label fx:id="carWarehouseTotal" />
             <Label fx:id="carWarehouseState" />
+        </VBox>
+        <VBox alignment="CENTER">
+            <padding>
+                <Insets topRightBottomLeft="10" />
+            </padding>
+            <Label text="Car Dealers" />
+            <Slider fx:id="carRequestingRate" value="5.0" blockIncrement="0.50" majorTickUnit="1.0"
+                    min="1.0" max="10.0" showTickLabels="true" showTickMarks="true" />
         </VBox>
     </HBox>
 </AnchorPane>

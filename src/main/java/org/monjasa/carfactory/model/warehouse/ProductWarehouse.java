@@ -3,6 +3,7 @@ package org.monjasa.carfactory.model.warehouse;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.IntegerProperty;
 import org.monjasa.carfactory.domain.Product;
+import org.monjasa.carfactory.util.ObservableBlockingQueue;
 
 public interface ProductWarehouse<T extends Product> {
 

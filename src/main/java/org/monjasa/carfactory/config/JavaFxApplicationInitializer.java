@@ -8,7 +8,7 @@ import org.monjasa.carfactory.event.StageReadyEvent;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class JavaFxApplicationInitializer extends Application {
+public final class JavaFxApplicationInitializer extends Application {
 
     private ConfigurableApplicationContext applicationContext;
 

@@ -1,4 +1,4 @@
-package org.monjasa.carfactory.service.factory;
+package org.monjasa.carfactory.service.component;
 
 import org.monjasa.carfactory.domain.CarComponent;
 
