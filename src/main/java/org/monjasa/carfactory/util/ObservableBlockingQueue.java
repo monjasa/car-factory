@@ -1,8 +1,10 @@
 package org.monjasa.carfactory.util;
 
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.collections.ObservableListBase;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -11,10 +13,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
-@RequiredArgsConstructor
 public class ObservableBlockingQueue<E> extends ObservableListBase<E> implements BlockingQueue<E> {
 
+    private final IntegerProperty capacity;
     private final BlockingQueue<E> backingBlockingQueue;
+
+    public ObservableBlockingQueue(BlockingQueue<E> backingBlockingQueue) {
+        this.backingBlockingQueue = backingBlockingQueue;
+        this.capacity = new ReadOnlyIntegerWrapper(backingBlockingQueue.remainingCapacity());
+    }
 
     @Override
     public boolean offer(E e) {
@@ -140,5 +147,9 @@ public class ObservableBlockingQueue<E> extends ObservableListBase<E> implements
     @Override
     public int size() {
         return backingBlockingQueue.size();
+    }
+
+    public IntegerProperty capacityProperty() {
+        return capacity;
     }
 }

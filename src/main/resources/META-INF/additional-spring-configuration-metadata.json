@@ -1,15 +1,19 @@
 {
   "properties": [
     {
-      "name": "storage.engine.capacity",
+      "name": "warehouse.engine.capacity",
       "type": "java.lang.Integer"
     },
     {
-      "name": "storage.body.capacity",
+      "name": "warehouse.body.capacity",
       "type": "java.lang.Integer"
     },
     {
-      "name": "storage.accessory.capacity",
+      "name": "warehouse.accessory.capacity",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "warehouse.car.capacity",
       "type": "java.lang.Integer"
     },
     {
@@ -22,6 +26,14 @@
     },
     {
       "name": "producers.engine.count",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "constructors.count",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "constructors.construction-time",
       "type": "java.lang.Integer"
     }
   ]

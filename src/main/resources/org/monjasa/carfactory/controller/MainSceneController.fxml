@@ -5,35 +5,54 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.monjasa.carfactory.controller.MainSceneController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <VBox>
-        <padding>
-            <Insets topRightBottomLeft="10" />
-        </padding>
-        <VBox alignment="CENTER">
-            <Label text="Car Engine Storage" />
-            <Label fx:id="carEngineStorageProduced" />
-            <Label fx:id="carEngineStorageState" />
-            <Slider fx:id="carEngineProducingRateSlider" value="3.0" blockIncrement="0.25" majorTickUnit="1.0" min="1.0"
-                    max="5.0" showTickLabels="true" showTickMarks="true" />
+    <HBox>
+        <VBox>
+            <padding>
+                <Insets topRightBottomLeft="10" />
+            </padding>
+            <VBox alignment="CENTER">
+                <Label text="Engine Warehouse" />
+                <Label fx:id="carEngineWarehouseTotal" />
+                <Label fx:id="carEngineWarehouseState" />
+                <Slider fx:id="carEngineProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
+                        min="1.0"
+                        max="5.0" showTickLabels="true" showTickMarks="true" />
+            </VBox>
+            <VBox alignment="CENTER">
+                <Label text="Body Warehouse" />
+                <Label fx:id="carBodyWarehouseTotal" />
+                <Label fx:id="carBodyWarehouseState" />
+                <Slider fx:id="carBodyProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
+                        min="1.0"
+                        max="5.0" showTickLabels="true" showTickMarks="true" />
+            </VBox>
+            <VBox alignment="CENTER">
+                <Label text="Accessory Warehouse" />
+                <Label fx:id="carAccessoryWarehouseTotal" />
+                <Label fx:id="carAccessoryWarehouseState" />
+                <Slider fx:id="carAccessoryProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
+                        min="1.0" max="5.0" showTickLabels="true" showTickMarks="true" />
+            </VBox>
+        </VBox>
+        <VBox>
+            <padding>
+                <Insets topRightBottomLeft="10" />
+            </padding>
+            <Label fx:id="waitingCarCreationTasksCount" />
         </VBox>
         <VBox alignment="CENTER">
-            <Label text="Car Body Storage" />
-            <Label fx:id="carBodyStorageProduced" />
-            <Label fx:id="carBodyStorageState" />
-            <Slider fx:id="carBodyProducingRateSlider" value="3.0" blockIncrement="0.25" majorTickUnit="1.0" min="1.0"
-                    max="5.0" showTickLabels="true" showTickMarks="true" />
+            <padding>
+                <Insets topRightBottomLeft="10" />
+            </padding>
+            <Label text="Car Warehouse" />
+            <Label fx:id="carWarehouseTotal" />
+            <Label fx:id="carWarehouseState" />
         </VBox>
-        <VBox alignment="CENTER">
-            <Label text="Car Accessory Storage" />
-            <Label fx:id="carAccessoryStorageProduced" />
-            <Label fx:id="carAccessoryStorageState" />
-            <Slider fx:id="carAccessoryProducingRateSlider" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
-                    min="1.0" max="5.0" showTickLabels="true" showTickMarks="true" />
-        </VBox>
-    </VBox>
+    </HBox>
 </AnchorPane>

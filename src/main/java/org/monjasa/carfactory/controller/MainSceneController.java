@@ -1,18 +1,15 @@
 package org.monjasa.carfactory.controller;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import lombok.RequiredArgsConstructor;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.monjasa.carfactory.domain.CarAccessory;
-import org.monjasa.carfactory.domain.CarBody;
-import org.monjasa.carfactory.domain.CarEngine;
-import org.monjasa.carfactory.model.CarComponentProducersModel;
-import org.monjasa.carfactory.model.CarComponentStorage;
+import org.monjasa.carfactory.domain.Car;
+import org.monjasa.carfactory.model.*;
+import org.monjasa.carfactory.model.warehouse.AuditableWarehouse;
+import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,70 +18,82 @@ import org.springframework.stereotype.Component;
 public class MainSceneController {
 
     private final CarComponentProducersModel carComponentProducersModel;
+    private final CarPlantModel carPlantModel;
 
-    @FXML private Label carEngineStorageState;
-    @FXML private Label carEngineStorageProduced;
-    @FXML private Slider carEngineProducingRateSlider;
+    @FXML private Label carEngineWarehouseState;
+    @FXML private Label carEngineWarehouseTotal;
+    @FXML private Slider carEngineProducingRate;
 
-    @FXML private Label carBodyStorageState;
-    @FXML private Label carBodyStorageProduced;
-    @FXML private Slider carBodyProducingRateSlider;
+    @FXML private Label carBodyWarehouseState;
+    @FXML private Label carBodyWarehouseTotal;
+    @FXML private Slider carBodyProducingRate;
 
-    @FXML private Label carAccessoryStorageState;
-    @FXML private Label carAccessoryStorageProduced;
-    @FXML private Slider carAccessoryProducingRateSlider;
+    @FXML private Label carAccessoryWarehouseState;
+    @FXML private Label carAccessoryWarehouseTotal;
+    @FXML private Slider carAccessoryProducingRate;
+
+    @FXML private Label carWarehouseState;
+    @FXML private Label carWarehouseTotal;
+
+    @FXML private Label waitingCarCreationTasksCount;
+
+    private void setupProducingInfo(ProductWarehouse<?> productWarehouse, Label warehouseState, Label warehouseTotal, Slider slider) {
+
+        warehouseState.textProperty().bind(
+                productWarehouse.sizeBinding().asString()
+                        .concat(" / ")
+                        .concat(productWarehouse.capacityProperty().asString())
+        );
+
+        warehouseTotal.textProperty().bind(
+                new SimpleStringProperty("Total: ")
+                        .concat(((AuditableWarehouse) productWarehouse).auditSizeBinding().asString())
+        );
+
+        carComponentProducersModel.getCarComponentProducers().stream()
+                .filter(carComponentProducer -> carComponentProducer.getCarComponentWarehouse() == productWarehouse)
+                .forEach(carComponentProducer -> carComponentProducer.getProducingRate().bind(slider.valueProperty()));
+
+    }
 
     public void initialize() {
 
-        CarComponentStorage<CarEngine> carEngineStorage = carComponentProducersModel.getCarEngineStorage();
+        setupProducingInfo(
+                carComponentProducersModel.getCarEngineWarehouse(),
+                carEngineWarehouseState,
+                carEngineWarehouseTotal,
+                carEngineProducingRate
+        );
 
-        carEngineStorageState.textProperty().bind(
-                Bindings.size(carEngineStorage.getObservableBlockingQueue()).asString()
+        setupProducingInfo(
+                carComponentProducersModel.getCarBodyWarehouse(),
+                carBodyWarehouseState,
+                carBodyWarehouseTotal,
+                carBodyProducingRate
+        );
+
+        setupProducingInfo(
+                carComponentProducersModel.getCarAccessoryWarehouse(),
+                carAccessoryWarehouseState,
+                carAccessoryWarehouseTotal,
+                carAccessoryProducingRate
+        );
+
+        ProductWarehouse<Car> carWarehouse = carPlantModel.getCarWarehouse();
+        carWarehouseState.textProperty().bind(
+                carWarehouse.sizeBinding().asString()
                         .concat(" / ")
-                        .concat(carEngineStorage.getStorageCapacity().asString())
+                        .concat(carWarehouse.capacityProperty().asString())
         );
 
-        carEngineStorageProduced.textProperty().bind(
+        carWarehouseTotal.textProperty().bind(
                 new SimpleStringProperty("Total: ")
-                        .concat(carEngineStorage.getProducedCarComponentsCount().asString())
+                        .concat(((AuditableWarehouse) carWarehouse).auditSizeBinding().asString())
         );
 
-        carComponentProducersModel.getCarComponentProducers().stream()
-                .filter(carComponentProducer -> carComponentProducer.getCarComponentStorage() == carEngineStorage)
-                .forEach(carComponentProducer -> carComponentProducer.getProducingRate().bind(carEngineProducingRateSlider.valueProperty()));
-
-        CarComponentStorage<CarBody> carBodyStorage = carComponentProducersModel.getCarBodyStorage();
-
-        carBodyStorageState.textProperty().bind(
-                Bindings.size(carBodyStorage.getObservableBlockingQueue()).asString()
-                        .concat(" / ")
-                        .concat(carBodyStorage.getStorageCapacity().asString())
+        waitingCarCreationTasksCount.textProperty().bind(
+                new SimpleStringProperty("Waiting: +")
+                        .concat(carPlantModel.getWaitingTaskCount().asString())
         );
-
-        carBodyStorageProduced.textProperty().bind(
-                new SimpleStringProperty("Total: ")
-                        .concat(carBodyStorage.getProducedCarComponentsCount().asString())
-        );
-
-        carComponentProducersModel.getCarComponentProducers().stream()
-                .filter(carComponentProducer -> carComponentProducer.getCarComponentStorage() == carBodyStorage)
-                .forEach(carComponentProducer -> carComponentProducer.getProducingRate().bind(carBodyProducingRateSlider.valueProperty()));
-
-        CarComponentStorage<CarAccessory> carAccessoryStorage = carComponentProducersModel.getCarAccessoryStorage();
-
-        carAccessoryStorageState.textProperty().bind(
-                Bindings.size(carAccessoryStorage.getObservableBlockingQueue()).asString()
-                        .concat(" / ")
-                        .concat(carAccessoryStorage.getStorageCapacity().asString())
-        );
-
-        carAccessoryStorageProduced.textProperty().bind(
-                new SimpleStringProperty("Total: ")
-                        .concat(carAccessoryStorage.getProducedCarComponentsCount().asString())
-        );
-
-        carComponentProducersModel.getCarComponentProducers().stream()
-                .filter(carComponentProducer -> carComponentProducer.getCarComponentStorage() == carAccessoryStorage)
-                .forEach(carComponentProducer -> carComponentProducer.getProducingRate().bind(carAccessoryProducingRateSlider.valueProperty()));
     }
 }
