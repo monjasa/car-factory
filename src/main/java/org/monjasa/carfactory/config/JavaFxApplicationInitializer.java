@@ -22,12 +22,13 @@ public class JavaFxApplicationInitializer extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Car Factory Management");
         applicationContext.publishEvent(new StageReadyEvent(primaryStage));
     }
 
     @Override
-    public void stop() throws Exception {
+    public void stop() {
         this.applicationContext.close();
         Platform.exit();
     }

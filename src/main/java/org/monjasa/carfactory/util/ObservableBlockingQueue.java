@@ -42,11 +42,7 @@ public class ObservableBlockingQueue<E> extends ObservableListBase<E> implements
     @Override
     public void put(E e) throws InterruptedException {
 
-        try {
-            backingBlockingQueue.put(e);
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        }
+        backingBlockingQueue.put(e);
 
         Platform.runLater(() -> {
             beginChange();
@@ -62,7 +58,16 @@ public class ObservableBlockingQueue<E> extends ObservableListBase<E> implements
 
     @Override
     public E take() throws InterruptedException {
-        return null;
+
+        E e = backingBlockingQueue.take();
+
+        Platform.runLater(() -> {
+            beginChange();
+            nextRemove(0, e);
+            endChange();
+        });
+
+        return e;
     }
 
     @Override

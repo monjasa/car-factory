@@ -1,15 +1,27 @@
 {
   "properties": [
     {
-      "name": "storage-capacity.engine",
+      "name": "storage.engine.capacity",
       "type": "java.lang.Integer"
     },
     {
-      "name": "storage-capacity.body",
+      "name": "storage.body.capacity",
       "type": "java.lang.Integer"
     },
     {
-      "name": "storage-capacity.accessories",
+      "name": "storage.accessory.capacity",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "producers.accessory.count",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "producers.body.count",
+      "type": "java.lang.Integer"
+    },
+    {
+      "name": "producers.engine.count",
       "type": "java.lang.Integer"
     }
   ]

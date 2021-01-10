@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.geometry.Insets?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.monjasa.carfactory.controller.MainSceneController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <VBox alignment="CENTER">
-        <Label fx:id="queueSizeLabel" />
-        <Button onAction="#handleClick">Click</Button>
+    <VBox>
+        <padding>
+            <Insets topRightBottomLeft="10" />
+        </padding>
+        <VBox alignment="CENTER">
+            <Label text="Car Engine Storage" />
+            <Label fx:id="carEngineStorageProduced" />
+            <Label fx:id="carEngineStorageState" />
+            <Slider fx:id="carEngineProducingRateSlider" value="3.0" blockIncrement="0.25" majorTickUnit="1.0" min="1.0"
+                    max="5.0" showTickLabels="true" showTickMarks="true" />
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="Car Body Storage" />
+            <Label fx:id="carBodyStorageProduced" />
+            <Label fx:id="carBodyStorageState" />
+            <Slider fx:id="carBodyProducingRateSlider" value="3.0" blockIncrement="0.25" majorTickUnit="1.0" min="1.0"
+                    max="5.0" showTickLabels="true" showTickMarks="true" />
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="Car Accessory Storage" />
+            <Label fx:id="carAccessoryStorageProduced" />
+            <Label fx:id="carAccessoryStorageState" />
+            <Slider fx:id="carAccessoryProducingRateSlider" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
+                    min="1.0" max="5.0" showTickLabels="true" showTickMarks="true" />
+        </VBox>
     </VBox>
 </AnchorPane>
