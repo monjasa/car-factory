@@ -2,7 +2,6 @@ package org.monjasa.carfactory.model.producer;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.monjasa.carfactory.domain.CarComponent;

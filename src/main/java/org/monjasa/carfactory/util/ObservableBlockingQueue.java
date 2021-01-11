@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.collections.ObservableListBase;
-import lombok.Getter;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -60,7 +59,7 @@ public class ObservableBlockingQueue<E> extends ObservableListBase<E> implements
 
     @Override
     public boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException {
-        return false;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
@@ -79,27 +78,27 @@ public class ObservableBlockingQueue<E> extends ObservableListBase<E> implements
 
     @Override
     public E poll(long timeout, TimeUnit unit) throws InterruptedException {
-        return null;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public int remainingCapacity() {
-        return 0;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public int drainTo(Collection<? super E> c) {
-        return 0;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public int drainTo(Collection<? super E> c, int maxElements) {
-        return 0;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public E remove() {
-        return null;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override

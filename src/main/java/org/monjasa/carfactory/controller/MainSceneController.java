@@ -105,6 +105,6 @@ public class MainSceneController {
                         .concat(carPlantModel.getWaitingTaskCount().asString())
         );
 
-        carDealersModel.getCarDealers().forEach(carDealer -> carDealer.requestingRateProperty().bind(carRequestingRate.valueProperty()));
+        carDealersModel.getCarDealers().forEach(carDealer -> carDealer.requestingRateProperty().bind(carRequestingRate.valueProperty().multiply(1000)));
     }
 }

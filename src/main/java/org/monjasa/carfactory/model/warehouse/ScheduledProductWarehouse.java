@@ -1,6 +1,7 @@
 package org.monjasa.carfactory.model.warehouse;
 
 import org.monjasa.carfactory.domain.Product;
+import org.monjasa.carfactory.util.DaemonThreadFactory;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -14,11 +15,7 @@ public class ScheduledProductWarehouse<T extends Product> extends AbstractProduc
 
         super(warehouseCapacity);
 
-        this.executorService = new ScheduledThreadPoolExecutor(1, runnable -> {
-            Thread thread = new Thread(runnable);
-            thread.setDaemon(true);
-            return thread;
-        });
+        this.executorService = new ScheduledThreadPoolExecutor(1,  new DaemonThreadFactory());
     }
 
     @Override

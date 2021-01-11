@@ -59,7 +59,7 @@
                 <Insets topRightBottomLeft="10" />
             </padding>
             <Label text="Car Dealers" />
-            <Slider fx:id="carRequestingRate" value="5.0" blockIncrement="0.50" majorTickUnit="1.0"
+            <Slider fx:id="carRequestingRate" value="5.0" blockIncrement="0.50" majorTickUnit="1.0" minorTickCount="1"
                     min="1.0" max="10.0" showTickLabels="true" showTickMarks="true" />
         </VBox>
     </HBox>

@@ -15,7 +15,7 @@ public class CarDealer {
 
     @NonNull private final ProductWarehouse<Car> carWarehouse;
 
-    private final DoubleProperty requestingRate = new SimpleDoubleProperty(1.0);
+    private final DoubleProperty requestingRate = new SimpleDoubleProperty(1000);
 
     public void startRequesting() {
 
@@ -29,12 +29,12 @@ public class CarDealer {
                 } catch (InterruptedException exception) {
                     exception.printStackTrace();
                 } finally {
-                    scheduledCarWarehouse.scheduleWarehouseTask(this, requestingRate.multiply(1000).longValue(), TimeUnit.MILLISECONDS);
+                    scheduledCarWarehouse.scheduleWarehouseTask(this, requestingRate.longValue(), TimeUnit.MILLISECONDS);
                 }
             }
         };
 
-        scheduledCarWarehouse.scheduleWarehouseTask(requestingTask, requestingRate.multiply(1000).longValue(), TimeUnit.MILLISECONDS);
+        scheduledCarWarehouse.scheduleWarehouseTask(requestingTask, requestingRate.longValue(), TimeUnit.MILLISECONDS);
     }
 
     public DoubleProperty requestingRateProperty() {
