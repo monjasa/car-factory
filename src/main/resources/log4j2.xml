@@ -1,0 +1,26 @@
+<Configuration>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false" pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss.SSS}}{INFO=magenta}  %highlight{%-5level} --- [%15t] %-45logger{1.} : %msg%n" />
+        </Console>
+        <RollingFile name="RollingFile"
+                     fileName="./logs/car-factory-application.log"
+                     filePattern="./logs/$${date:MMM-yyyy}/car-factory-application-%d{dd-MM-yyyy}-%i.log.zip">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%15t] %-45logger{1.} : %msg%n" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+
+</Configuration>

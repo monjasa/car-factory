@@ -57,12 +57,12 @@ public class CarPlantModel {
 
             try {
                 Car car = Car.builder()
-                        .carEngine(carComponentProducersModel.getCarEngineFacilityFactory().getProductWarehouse().takeProduct())
-                        .carBody(carComponentProducersModel.getCarBodyFacilityFactory().getProductWarehouse().takeProduct())
-                        .carAccessory(carComponentProducersModel.getCarAccessoryFacilityFactory().getProductWarehouse().takeProduct())
+                        .carEngine(carComponentProducersModel.getCarEngineFacilityFactory().getProductWarehouse().consumeProduct())
+                        .carBody(carComponentProducersModel.getCarBodyFacilityFactory().getProductWarehouse().consumeProduct())
+                        .carAccessory(carComponentProducersModel.getCarAccessoryFacilityFactory().getProductWarehouse().consumeProduct())
                         .build();
                 Thread.sleep(carConstructionTime);
-                carWarehouse.putProduct(car);
+                carWarehouse.supplyProduct(car);
             } catch (InterruptedException exception) {
                 exception.printStackTrace();
             }

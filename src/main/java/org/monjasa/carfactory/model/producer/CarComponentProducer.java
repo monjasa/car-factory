@@ -12,13 +12,14 @@ import org.monjasa.carfactory.service.component.CarComponentFactory;
 import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
-public class CarComponentProducer<T extends CarComponent> {
+public class CarComponentProducer<T extends CarComponent> implements ProductProducer<T> {
 
     @NonNull private final CarComponentFactory<T> carComponentFactory;
     @NonNull private final ProductWarehouse<T> carComponentWarehouse;
 
     private final DoubleProperty producingRate = new SimpleDoubleProperty(1.0);
 
+    @Override
     public void startProducing() {
 
         final ScheduledWarehouse scheduledWarehouse = (ScheduledWarehouse) CarComponentProducer.this.carComponentWarehouse;
@@ -27,7 +28,7 @@ public class CarComponentProducer<T extends CarComponent> {
             @Override
             public void run() {
                 try {
-                    carComponentWarehouse.putProduct(carComponentFactory.createCarComponent());
+                    carComponentWarehouse.supplyProduct(carComponentFactory.createCarComponent(), CarComponentProducer.this);
                 } catch (InterruptedException exception) {
                     exception.printStackTrace();
                 } finally {
@@ -39,6 +40,7 @@ public class CarComponentProducer<T extends CarComponent> {
         scheduledWarehouse.scheduleWarehouseTask(producingTask, producingRate.multiply(1000).longValue(), TimeUnit.MILLISECONDS);
     }
 
+    @Override
     public DoubleProperty producingRateProperty() {
         return producingRate;
     }

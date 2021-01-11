@@ -28,7 +28,7 @@ public class CarDealersModel {
     private void initializeModel() {
 
         this.carDealers = IntStream.range(0, dealersCount)
-                .mapToObj(value -> new CarDealer(carWarehouse))
+                .mapToObj(value -> CarDealer.of(carWarehouse))
                 .collect(Collectors.toList());
 
         this.carDealers.forEach(CarDealer::startRequesting);

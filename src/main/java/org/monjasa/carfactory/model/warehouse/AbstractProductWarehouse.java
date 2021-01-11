@@ -8,6 +8,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
 import lombok.Getter;
 import org.monjasa.carfactory.domain.Product;
+import org.monjasa.carfactory.model.dealer.ProductDealer;
+import org.monjasa.carfactory.model.producer.ProductProducer;
 import org.monjasa.carfactory.util.ObservableBlockingQueue;
 
 import java.util.ArrayList;
@@ -34,12 +36,23 @@ public abstract class AbstractProductWarehouse<T extends Product> implements Pro
     }
 
     @Override
-    public T takeProduct() throws InterruptedException {
+    public T consumeProduct() throws InterruptedException {
         return productQueue.take();
     }
 
     @Override
-    public void putProduct(T product) throws InterruptedException {
+    public T consumeProduct(ProductDealer<T> productDealer) throws InterruptedException {
+        return productQueue.take();
+    }
+
+    @Override
+    public void supplyProduct(T product) throws InterruptedException {
+        productQueue.put(product);
+        Platform.runLater(() -> productAudit.add(product));
+    }
+
+    @Override
+    public void supplyProduct(T product, ProductProducer<T> productProducer) throws InterruptedException {
         productQueue.put(product);
         Platform.runLater(() -> productAudit.add(product));
     }

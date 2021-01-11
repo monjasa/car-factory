@@ -3,20 +3,36 @@ package org.monjasa.carfactory.model.dealer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.monjasa.carfactory.domain.Car;
 import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
 import org.monjasa.carfactory.model.warehouse.ScheduledWarehouse;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
-@RequiredArgsConstructor
-public class CarDealer {
+@ToString(onlyExplicitlyIncluded = true)
+public class CarDealer implements ProductDealer<Car> {
 
-    @NonNull private final ProductWarehouse<Car> carWarehouse;
+    private static final AtomicInteger CURRENT_CAR_DEALER_ID = new AtomicInteger(1);
 
-    private final DoubleProperty requestingRate = new SimpleDoubleProperty(1000);
+    public static CarDealer of(@NonNull ProductWarehouse<Car> carWarehouse) {
+        return new CarDealer(CURRENT_CAR_DEALER_ID.getAndIncrement(), carWarehouse);
+    }
 
+    @ToString.Include
+    private final int id;
+
+    private final ProductWarehouse<Car> carWarehouse;
+    private final DoubleProperty requestingRate;
+
+    private CarDealer(int id, @NonNull ProductWarehouse<Car> carWarehouse) {
+        this.id = id;
+        this.carWarehouse = carWarehouse;
+        this.requestingRate = new SimpleDoubleProperty(1000);
+    }
+
+    @Override
     public void startRequesting() {
 
         final ScheduledWarehouse scheduledCarWarehouse = (ScheduledWarehouse) carWarehouse;
@@ -25,7 +41,7 @@ public class CarDealer {
             @Override
             public void run() {
                 try {
-                    carWarehouse.takeProduct();
+                    carWarehouse.consumeProduct(CarDealer.this);
                 } catch (InterruptedException exception) {
                     exception.printStackTrace();
                 } finally {
@@ -37,6 +53,7 @@ public class CarDealer {
         scheduledCarWarehouse.scheduleWarehouseTask(requestingTask, requestingRate.longValue(), TimeUnit.MILLISECONDS);
     }
 
+    @Override
     public DoubleProperty requestingRateProperty() {
         return requestingRate;
     }
