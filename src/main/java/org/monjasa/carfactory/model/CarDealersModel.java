@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
 public class CarDealersModel {
 
     @Value("${dealers.count}")
-    private int dealersCount;
+    @Getter private int dealersCount;
 
     @Getter private ProductWarehouse<Car> carWarehouse;
     @Getter private List<CarDealer> carDealers;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="org.monjasa.carfactory.controller.CarComponentProducersController">
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="100" />
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints percentHeight="33" />
+        <RowConstraints percentHeight="33" />
+        <RowConstraints percentHeight="33" />
+    </rowConstraints>
+
+    <VBox GridPane.rowIndex="0" alignment="CENTER">
+        <Label text="Engine Producers" />
+        <Label fx:id="carEngineWarehouseTotal" />
+        <Slider fx:id="carEngineProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
+                min="1.0"
+                max="5.0" showTickLabels="true" showTickMarks="true" />
+
+        <Label text="Engine Warehouse" />
+        <Label fx:id="carEngineWarehouseState" />
+    </VBox>
+    <VBox GridPane.rowIndex="1" alignment="CENTER">
+        <Label text="Body Producers" />
+        <Label fx:id="carBodyWarehouseTotal" />
+        <Slider fx:id="carBodyProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
+                min="1.0"
+                max="5.0" showTickLabels="true" showTickMarks="true" />
+
+        <Label text="Body Warehouse" />
+        <Label fx:id="carBodyWarehouseState" />
+    </VBox>
+    <VBox GridPane.rowIndex="2" alignment="CENTER">
+        <Label text="Accessory Producers" />
+        <Label fx:id="carAccessoryWarehouseTotal" />
+        <Slider fx:id="carAccessoryProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
+                min="1.0" max="5.0" showTickLabels="true" showTickMarks="true" />
+
+        <Label text="Accessory Warehouse" />
+        <ImageView fitWidth="150.0" preserveRatio="true">
+            <Image url="@/assets/images/car-accessory-warehouse.png" />
+        </ImageView>
+        <Label fx:id="carAccessoryWarehouseState" />
+    </VBox>
+</GridPane>

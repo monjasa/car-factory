@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-@Log4j2
 public class CarWarehouseObserver implements WarehouseObserver {
 
     public CarPlantModel carPlantModel;

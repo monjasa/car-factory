@@ -1,61 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.monjasa.carfactory.controller.MainSceneController"
+      prefHeight="400.0" prefWidth="800.0">
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.monjasa.carfactory.controller.MainSceneController">
+    <GridPane HBox.hgrow="ALWAYS" hgap="10" vgap="10">
 
-    <HBox>
-        <VBox>
-            <padding>
-                <Insets topRightBottomLeft="10" />
-            </padding>
-            <VBox alignment="CENTER">
-                <Label text="Engine Warehouse" />
-                <Label fx:id="carEngineWarehouseTotal" />
-                <Label fx:id="carEngineWarehouseState" />
-                <Slider fx:id="carEngineProducingRate" blockIncrement="0.25" majorTickUnit="1.0" max="5.0" min="1.0" showTickLabels="true" showTickMarks="true" value="3.0" />
-            </VBox>
-            <VBox alignment="CENTER">
-                <Label text="Body Warehouse" />
-                <Label fx:id="carBodyWarehouseTotal" />
-                <Label fx:id="carBodyWarehouseState" />
-                <Slider fx:id="carBodyProducingRate" blockIncrement="0.25" majorTickUnit="1.0" max="5.0" min="1.0" showTickLabels="true" showTickMarks="true" value="3.0" />
-            </VBox>
-            <VBox alignment="CENTER">
-                <Label text="Accessory Warehouse" />
-                <Label fx:id="carAccessoryWarehouseTotal" />
-                <Label fx:id="carAccessoryWarehouseState" />
-                <Slider fx:id="carAccessoryProducingRate" blockIncrement="0.25" majorTickUnit="1.0" max="5.0" min="1.0" showTickLabels="true" showTickMarks="true" value="3.0" />
-            </VBox>
+        <columnConstraints>
+            <ColumnConstraints percentWidth="17" />
+            <ColumnConstraints percentWidth="15" />
+            <ColumnConstraints percentWidth="10" />
+            <ColumnConstraints percentWidth="15" />
+            <ColumnConstraints percentWidth="15" />
+            <ColumnConstraints percentWidth="15" />
+            <ColumnConstraints percentWidth="12" />
+        </columnConstraints>
+
+        <rowConstraints>
+            <RowConstraints percentHeight="33"/>
+            <RowConstraints percentHeight="33"/>
+            <RowConstraints percentHeight="33"/>
+        </rowConstraints>
+
+        <padding>
+            <Insets topRightBottomLeft="10" />
+        </padding>
+
+        <StackPane GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="0">
+            <fx:include source="CarComponentProducersController.fxml" />
+        </StackPane>
+
+        <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" style="-fx-background-color: lightgray">
+            <Label text="Engine Pipeline" />
         </VBox>
-        <VBox>
-            <padding>
-                <Insets topRightBottomLeft="10" />
-            </padding>
+
+        <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER" style="-fx-background-color: lightgray">
+            <Label text="Body Pipeline" />
+        </VBox>
+
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="1" alignment="CENTER" style="-fx-background-color: lightgray">
+            <Label text="Accessory Pipeline" />
+        </VBox>
+
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="2" alignment="CENTER">
+            <Label text="Car Plant" />
             <Label fx:id="waitingCarCreationTasksCount" />
-        </VBox>
-        <VBox alignment="CENTER">
-            <padding>
-                <Insets topRightBottomLeft="10" />
-            </padding>
-            <Label text="Car Warehouse" />
             <Label fx:id="carWarehouseTotal" />
+        </VBox>
+
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="3" alignment="CENTER" style="-fx-background-color: lightgray">
+            <Label text="Car Pipeline" />
+        </VBox>
+
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="4" alignment="CENTER">
+            <Label text="Car Warehouse" />
             <Label fx:id="carWarehouseState" />
         </VBox>
-        <VBox alignment="CENTER">
-            <padding>
-                <Insets topRightBottomLeft="10" />
-            </padding>
-            <Label text="Car Dealers" />
-            <Slider fx:id="carRequestingRate" blockIncrement="0.50" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="5.0" />
-        </VBox>
-    </HBox>
 
-    <fx:include fx:id="firstPipeline" source="PipelineController.fxml"/>
-</AnchorPane>
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="5" alignment="CENTER" style="-fx-background-color: lightgray">
+            <Label text="Dealers Pipeline" />
+        </VBox>
+
+        <StackPane GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="6">
+            <fx:include source="CarDealersController.fxml" />
+        </StackPane>
+    </GridPane>
+</HBox>
