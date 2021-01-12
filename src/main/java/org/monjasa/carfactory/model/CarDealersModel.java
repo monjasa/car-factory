@@ -4,12 +4,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.monjasa.carfactory.domain.Car;
 import org.monjasa.carfactory.model.dealer.CarDealer;
+import org.monjasa.carfactory.model.transport.Pipeline;
 import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -35,7 +37,7 @@ public class CarDealersModel {
     private void initializeModel() {
 
         this.carDealers = IntStream.range(0, dealersCount)
-                .mapToObj(value -> CarDealer.of(carWarehouse))
+                .mapToObj(value -> CarDealer.of(carWarehouse, pipeline))
                 .collect(Collectors.toList());
 
         this.carDealers.forEach(CarDealer::startRequesting);

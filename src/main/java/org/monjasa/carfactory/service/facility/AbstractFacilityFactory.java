@@ -2,6 +2,7 @@ package org.monjasa.carfactory.service.facility;
 
 import org.monjasa.carfactory.domain.CarComponent;
 import org.monjasa.carfactory.model.producer.CarComponentProducer;
+import org.monjasa.carfactory.model.transport.Pipeline;
 import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
 import org.monjasa.carfactory.service.component.CarComponentFactory;
 
@@ -16,9 +17,11 @@ public interface AbstractFacilityFactory<T extends CarComponent> {
     List<CarComponentProducer<T>> getCarComponentProducers();
     int getCarComponentProducersCount();
 
+    Pipeline getPipeline();
+
     default List<CarComponentProducer<T>> createCarComponentProducers(int carComponentProducersCount) {
         return IntStream.range(0, carComponentProducersCount)
-                .mapToObj(value -> new CarComponentProducer<>(getCarComponentFactory(), getProductWarehouse()))
+                .mapToObj(value -> new CarComponentProducer<>(getCarComponentFactory(), getProductWarehouse(), getPipeline()))
                 .collect(Collectors.toList());
     }
 }

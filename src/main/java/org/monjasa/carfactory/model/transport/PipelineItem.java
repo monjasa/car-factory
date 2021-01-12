@@ -9,12 +9,12 @@ import static org.monjasa.carfactory.model.transport.Pipeline.TRAVEL_TIME_MILLIS
 
 @RequiredArgsConstructor
 @EqualsAndHashCode
-public class PipelineItem<T extends Product> {
+public class PipelineItem {
 
-    @Getter private final T product;
+    @Getter private final Product product;
     @Getter private final long creationTime;
 
-    PipelineItem(T product) {
+    PipelineItem(Product product) {
         this.product = product;
         this.creationTime = System.currentTimeMillis();
     }

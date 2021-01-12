@@ -10,27 +10,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 @Scope("prototype")
-public class Pipeline<T extends Product> {
+public class Pipeline {
+    static final long TRAVEL_TIME_MILLIS = 500;
 
-    private static Pipeline<? extends Product> instance;
-
-    public static Pipeline<? extends Product> getInstance(){
-        if(instance == null)
-            instance = new Pipeline<>();
-
-        return instance;
-    }
-
-    static final long TRAVEL_TIME_MILLIS = 5000;
-
-    @Getter private final List<PipelineItem<T>> items;
+    @Getter private final List<PipelineItem> items;
 
     public Pipeline(){
         items = new CopyOnWriteArrayList<>();
     }
 
     // TODO: Refactor
-    public void addProduct(T product){
-        items.add(new PipelineItem<>(product));
+    public void addProduct(Product product){
+        items.add(new PipelineItem(product));
     }
 }

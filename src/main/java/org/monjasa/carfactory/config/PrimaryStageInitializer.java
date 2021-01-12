@@ -26,4 +26,6 @@ public final class PrimaryStageInitializer implements ApplicationListener<StageR
         stage.setScene(mainScene);
         stage.show();
     }
+
+
 }

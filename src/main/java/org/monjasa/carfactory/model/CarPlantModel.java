@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleLongProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.monjasa.carfactory.domain.Car;
+import org.monjasa.carfactory.model.transport.Pipeline;
 import org.monjasa.carfactory.model.warehouse.ObservableWarehouse;
 import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
 import org.monjasa.carfactory.util.DaemonThreadFactory;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -52,6 +54,11 @@ public class CarPlantModel {
         Platform.runLater(() -> waitingTaskCount.set(waitingTaskCount.get() + 1));
     }
 
+    @Resource(name = "carPipeline")
+    public void setPipeline(Pipeline pipeline) {
+        this.pipeline = pipeline;
+    }
+
     private class CarConstructionTask implements Runnable {
         @Override
         public void run() {
@@ -65,6 +72,7 @@ public class CarPlantModel {
                         .carAccessory(carComponentProducersModel.getCarAccessoryFacilityFactory().getProductWarehouse().consumeProduct())
                         .build();
                 Thread.sleep(carConstructionTime);
+                pipeline.addProduct(car);
                 carWarehouse.supplyProduct(car);
             } catch (InterruptedException exception) {
                 exception.printStackTrace();
