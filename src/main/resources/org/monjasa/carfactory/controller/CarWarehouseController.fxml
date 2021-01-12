@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.monjasa.carfactory.controller.CarWarehouseController"
+      alignment="CENTER">
+
+    <Label text="Car Warehouse" />
+    <Label fx:id="carWarehouseTotal" />
+    <Label fx:id="carWarehouseState" />
+</VBox>

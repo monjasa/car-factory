@@ -4,109 +4,105 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.monjasa.carfactory.domain.Car;
+import org.monjasa.carfactory.domain.CarEngine;
 import org.monjasa.carfactory.model.transport.Pipeline;
-import org.springframework.context.annotation.Scope;
+import org.monjasa.carfactory.model.transport.PipelineItem;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 @Component
 @FxmlView
 public class PipelineController {
 
-    @FXML AnchorPane scene;
+    private static final double ICON_SIZE = 10.0;
+
+    @FXML StackPane stackPane;
 
     @Setter
-    private Pipeline pipeline = null;
+    private Pipeline<CarEngine> pipeline;
 
-    private final Map<Pipeline.Item, Circle> icons = new HashMap<>();
+    private final Map<PipelineItem<CarEngine>, Circle> icons = new HashMap<>();
 
-    Point2D beginPosition;
-    Point2D endPosition;
+    private Point2D beginPosition;
+    private Point2D endPosition;
 
-    private static double ICON_SIZE = 10.0;
-
-    private void initializeCoordinates(){
+    private void initializeCoordinates() {
         beginPosition = new Point2D(
-                ICON_SIZE/2 + scene.getLayoutX(),
-                ICON_SIZE/2 + scene.getLayoutY()
+                ICON_SIZE / 2 + stackPane.getLayoutX(),
+                ICON_SIZE / 2 + stackPane.getLayoutY()
         );
 
         endPosition = new Point2D(
-                scene.getLayoutX() + scene.getPrefWidth() - ICON_SIZE/2 ,
-                ICON_SIZE/2 + scene.getLayoutY()
+                stackPane.getLayoutX() + stackPane.getPrefWidth() - ICON_SIZE / 2,
+                ICON_SIZE / 2 + stackPane.getLayoutY()
         );
     }
 
-    private Circle getIconForItem(Pipeline.Item item){
+    private Circle getIconForItem(PipelineItem<CarEngine> item) {
+
         Circle icon = icons.get(item);
 
-        if(icon == null){
+        if (icon == null) {
             Circle newIcon = new Circle();
             newIcon.setLayoutX(beginPosition.getX());
             newIcon.setLayoutY(beginPosition.getY());
             newIcon.setRadius(10);
-            newIcon.setStroke(Color.rgb(240,0,0));
-            newIcon.setFill(Color.rgb(240,128,128));
+            newIcon.setStroke(Color.rgb(240, 0, 0));
+            newIcon.setFill(Color.rgb(240, 128, 128));
             icons.put(item, newIcon);
 
-            scene.getChildren().add(newIcon);
+            stackPane.getChildren().add(newIcon);
             return newIcon;
         }
 
         return icon;
     }
 
-    private void removeIconForItem(Pipeline.Item item){
+    private void removeIconForItem(PipelineItem<CarEngine> item) {
         var icon = icons.remove(item);
-        if(icon != null){
-            scene.getChildren().remove(icon);
+        if (icon != null) {
+            stackPane.getChildren().remove(icon);
         }
     }
 
-    public void initialize(){
+    public void initialize() {
         initializeCoordinates();
         AnimationTimer timer = new AnimationTimer() {
 
-            private long startTime ;
-
             @Override
             public void start() {
-                startTime = System.currentTimeMillis();
                 super.start();
             }
 
             @Override
             public void handle(long timestamp) {
+
                 long now = System.currentTimeMillis();
-                pipeline.itemList().forEach(item ->{
+                pipeline.getItems().forEach(item -> {
 
                     var icon = getIconForItem(item);
-                    //Pipeline.Point currentPosition = item.currentPosition(now);
                     float progress = item.currentProgress(now);
 
-                    if(progress > 1.0) {
+                    if (progress > 1.0) {
                         removeIconForItem(item);
-                    }
-                    else{
-
+                    } else {
                         Point2D difference = endPosition.subtract(beginPosition);
                         Point2D currentPosition = beginPosition.add(difference.multiply(progress));
                         icon.setLayoutX(currentPosition.getX());
                         icon.setLayoutY(currentPosition.getY());
                     }
-
                 });
             }
         };
+
         timer.start();
     }
 }

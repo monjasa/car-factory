@@ -2,10 +2,9 @@
 
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="scene"
+<StackPane fx:id="stackPane"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.monjasa.carfactory.controller.PipelineController"
-            prefHeight="100.0" prefWidth="200.0">
+            fx:controller="org.monjasa.carfactory.controller.PipelineController">
 
-</AnchorPane>
+</StackPane>

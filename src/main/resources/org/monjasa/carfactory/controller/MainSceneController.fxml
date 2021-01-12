@@ -21,18 +21,17 @@
         </columnConstraints>
 
         <rowConstraints>
-            <RowConstraints percentHeight="33"/>
-            <RowConstraints percentHeight="33"/>
-            <RowConstraints percentHeight="33"/>
+            <RowConstraints percentHeight="33" />
+            <RowConstraints percentHeight="33" />
+            <RowConstraints percentHeight="33" />
         </rowConstraints>
 
         <padding>
             <Insets topRightBottomLeft="10" />
         </padding>
 
-        <StackPane GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="0">
-            <fx:include source="CarComponentProducersController.fxml" />
-        </StackPane>
+        <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="0"
+                    source="CarComponentProducersController.fxml" />
 
         <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" style="-fx-background-color: lightgray">
             <Label text="Engine Pipeline" />
@@ -46,27 +45,22 @@
             <Label text="Accessory Pipeline" />
         </VBox>
 
-        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="2" alignment="CENTER">
-            <Label text="Car Plant" />
-            <Label fx:id="waitingCarCreationTasksCount" />
-            <Label fx:id="carWarehouseTotal" />
-        </VBox>
+        <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="2"
+                    source="CarPlantController.fxml" />
 
         <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="3" alignment="CENTER" style="-fx-background-color: lightgray">
             <Label text="Car Pipeline" />
         </VBox>
 
-        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="4" alignment="CENTER">
-            <Label text="Car Warehouse" />
-            <Label fx:id="carWarehouseState" />
-        </VBox>
+        <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="4"
+                    source="CarWarehouseController.fxml" />
 
-        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="5" alignment="CENTER" style="-fx-background-color: lightgray">
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="5" alignment="CENTER"
+              style="-fx-background-color: lightgray">
             <Label text="Dealers Pipeline" />
         </VBox>
 
-        <StackPane GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="6">
-            <fx:include source="CarDealersController.fxml" />
-        </StackPane>
+        <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="6"
+                    source="CarDealersController.fxml" />
     </GridPane>
 </HBox>
