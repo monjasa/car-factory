@@ -19,7 +19,7 @@ public class CarDealersController {
     @FXML private Slider carRequestingRate;
 
     public void initialize() {
-        carDealersCount.setText(String.format("Car Dealers (x%d)", carDealersModel.getDealersCount()));
+        carDealersCount.setText(String.format("Car Dealers | %d", carDealersModel.getDealersCount()));
         carDealersModel.getCarDealers().forEach(carDealer -> carDealer.requestingRateProperty().bind(carRequestingRate.valueProperty().multiply(1000)));
     }
 }

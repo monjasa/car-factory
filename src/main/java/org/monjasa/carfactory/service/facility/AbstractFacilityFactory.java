@@ -14,6 +14,7 @@ public interface AbstractFacilityFactory<T extends CarComponent> {
     CarComponentFactory<T> getCarComponentFactory();
     ProductWarehouse<T> getProductWarehouse();
     List<CarComponentProducer<T>> getCarComponentProducers();
+    int getCarComponentProducersCount();
 
     default List<CarComponentProducer<T>> createCarComponentProducers(int carComponentProducersCount) {
         return IntStream.range(0, carComponentProducersCount)

@@ -15,11 +15,13 @@ public class CarPlantController {
 
     private final CarPlantModel carPlantModel;
 
+    @FXML private Label carProducersCount;
     @FXML private Label waitingCarCreationTasksCount;
 
     public void initialize() {
+        carProducersCount.setText(String.format("Car Constructors | %d", carPlantModel.getConstructorsCount()));
         waitingCarCreationTasksCount.textProperty().bind(
-                new SimpleStringProperty("Waiting: +")
+                new SimpleStringProperty(waitingCarCreationTasksCount.getText())
                         .concat(carPlantModel.getWaitingTaskCount().asString())
         );
     }

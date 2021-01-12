@@ -17,10 +17,10 @@ import java.util.List;
 public class CarBodyFacilityFactory implements AbstractFacilityFactory<CarBody> {
 
     @Value("${warehouse.body.capacity}")
-    private int carBodyWarehouseCapacity;
+    private int carComponentWarehouseCapacity;
 
     @Value("${producers.body.count}")
-    private int carBodyProducersCount;
+    @Getter private int carComponentProducersCount;
 
     @Getter private CarComponentFactory<CarBody> carComponentFactory;
     @Getter private ProductWarehouse<CarBody> productWarehouse;
@@ -28,8 +28,8 @@ public class CarBodyFacilityFactory implements AbstractFacilityFactory<CarBody> 
 
     @PostConstruct
     private void initializeService() {
-        productWarehouse = new ScheduledProductWarehouse<>(carBodyWarehouseCapacity);
-        carComponentProducers = createCarComponentProducers(carBodyProducersCount);
+        productWarehouse = new ScheduledProductWarehouse<>(carComponentWarehouseCapacity);
+        carComponentProducers = createCarComponentProducers(carComponentProducersCount);
     }
 
     @Autowired

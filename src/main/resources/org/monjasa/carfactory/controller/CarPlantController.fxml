@@ -2,11 +2,24 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.monjasa.carfactory.controller.CarPlantController"
       alignment="CENTER">
 
-    <Label text="Car Plant" />
-    <Label fx:id="waitingCarCreationTasksCount" />
+    <Label fx:id="carProducersCount" />
+    <ImageView fitWidth="200.0" preserveRatio="true">
+        <VBox.margin>
+            <Insets>
+                <top>20</top>
+                <bottom>10</bottom>
+            </Insets>
+        </VBox.margin>
+
+        <Image url="@/assets/images/car-plant.png" />
+    </ImageView>
+    <Label fx:id="waitingCarCreationTasksCount" text="Tasks in queue: " />
 </VBox>

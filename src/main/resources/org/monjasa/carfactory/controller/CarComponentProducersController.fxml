@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="org.monjasa.carfactory.controller.CarComponentProducersController">
+          fx:controller="org.monjasa.carfactory.controller.CarComponentProducersController"
+          vgap="20">
 
     <columnConstraints>
         <ColumnConstraints percentWidth="100" />
@@ -22,36 +19,64 @@
         <RowConstraints percentHeight="33" />
     </rowConstraints>
 
-    <VBox GridPane.rowIndex="0" alignment="CENTER">
-        <Label text="Engine Producers" />
-        <Label fx:id="carEngineWarehouseTotal" />
-        <Slider fx:id="carEngineProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
-                min="1.0"
-                max="5.0" showTickLabels="true" showTickMarks="true" />
+    <VBox GridPane.rowIndex="0" spacing="10" alignment="CENTER">
+        <Label fx:id="carEngineProducersCount" />
+        <VBox alignment="CENTER">
+            <Slider fx:id="carEngineProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
+                    min="1.0" max="5.0" showTickLabels="true" showTickMarks="true" />
+            <Label text="Supplying rate, s" />
+        </VBox>
 
-        <Label text="Engine Warehouse" />
-        <Label fx:id="carEngineWarehouseState" />
+        <ImageView fitWidth="150.0" preserveRatio="true">
+            <VBox.margin>
+                <Insets>
+                    <top>20</top>
+                </Insets>
+            </VBox.margin>
+            <Image url="@/assets/images/car-engine-warehouse.png" />
+        </ImageView>
+
+        <VBox alignment="CENTER">
+            <Label fx:id="carEngineWarehouseState" />
+            <Label fx:id="carEngineWarehouseTotal" text="Total supplied: " />
+        </VBox>
     </VBox>
     <VBox GridPane.rowIndex="1" alignment="CENTER">
-        <Label text="Body Producers" />
-        <Label fx:id="carBodyWarehouseTotal" />
+        <Label fx:id="carBodyProducersCount" />
         <Slider fx:id="carBodyProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
-                min="1.0"
-                max="5.0" showTickLabels="true" showTickMarks="true" />
+                min="1.0" max="5.0" showTickLabels="true" showTickMarks="true" />
+        <Label text="Supplying rate, s" />
 
-        <Label text="Body Warehouse" />
+        <ImageView fitWidth="150.0" preserveRatio="true">
+            <VBox.margin>
+                <Insets>
+                    <top>20</top>
+                    <bottom>10</bottom>
+                </Insets>
+            </VBox.margin>
+
+            <Image url="@/assets/images/car-body-warehouse.png" />
+        </ImageView>
         <Label fx:id="carBodyWarehouseState" />
+        <Label fx:id="carBodyWarehouseTotal" text="Total supplied: " />
     </VBox>
     <VBox GridPane.rowIndex="2" alignment="CENTER">
-        <Label text="Accessory Producers" />
-        <Label fx:id="carAccessoryWarehouseTotal" />
+        <Label fx:id="carAccessoryProducersCount" />
         <Slider fx:id="carAccessoryProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
                 min="1.0" max="5.0" showTickLabels="true" showTickMarks="true" />
+        <Label text="Supplying rate, s" />
 
-        <Label text="Accessory Warehouse" />
         <ImageView fitWidth="150.0" preserveRatio="true">
+            <VBox.margin>
+                <Insets>
+                    <top>20</top>
+                    <bottom>10</bottom>
+                </Insets>
+            </VBox.margin>
+
             <Image url="@/assets/images/car-accessory-warehouse.png" />
         </ImageView>
         <Label fx:id="carAccessoryWarehouseState" />
+        <Label fx:id="carAccessoryWarehouseTotal" text="Total supplied: " />
     </VBox>
 </GridPane>

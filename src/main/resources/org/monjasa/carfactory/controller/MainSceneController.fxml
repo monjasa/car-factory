@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.monjasa.carfactory.controller.MainSceneController"
+      styleClass="mainScene" stylesheets="@/assets/css/style.css"
       prefHeight="400.0" prefWidth="800.0">
 
     <GridPane HBox.hgrow="ALWAYS" hgap="10" vgap="10">
 
         <columnConstraints>
-            <ColumnConstraints percentWidth="17" />
+            <ColumnConstraints percentWidth="13" />
             <ColumnConstraints percentWidth="15" />
-            <ColumnConstraints percentWidth="10" />
+            <ColumnConstraints percentWidth="18" />
+            <ColumnConstraints percentWidth="13" />
             <ColumnConstraints percentWidth="15" />
-            <ColumnConstraints percentWidth="15" />
-            <ColumnConstraints percentWidth="15" />
-            <ColumnConstraints percentWidth="12" />
+            <ColumnConstraints percentWidth="13" />
+            <ColumnConstraints percentWidth="14" />
         </columnConstraints>
 
         <rowConstraints>
@@ -27,37 +27,36 @@
         </rowConstraints>
 
         <padding>
-            <Insets topRightBottomLeft="10" />
+            <Insets topRightBottomLeft="20" />
         </padding>
 
-        <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="0"
+        <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER">
+
+        </VBox>
+
+        <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER">
+
+        </VBox>
+
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER">
+
+        </VBox>
+
+        <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="1"
                     source="CarComponentProducersController.fxml" />
-
-        <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER" style="-fx-background-color: lightgray">
-            <Label text="Engine Pipeline" />
-        </VBox>
-
-        <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER" style="-fx-background-color: lightgray">
-            <Label text="Body Pipeline" />
-        </VBox>
-
-        <VBox GridPane.rowIndex="2" GridPane.columnIndex="1" alignment="CENTER" style="-fx-background-color: lightgray">
-            <Label text="Accessory Pipeline" />
-        </VBox>
 
         <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="2"
                     source="CarPlantController.fxml" />
 
-        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="3" alignment="CENTER" style="-fx-background-color: lightgray">
-            <Label text="Car Pipeline" />
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="3" alignment="CENTER">
+
         </VBox>
 
         <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="4"
                     source="CarWarehouseController.fxml" />
 
-        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="5" alignment="CENTER"
-              style="-fx-background-color: lightgray">
-            <Label text="Dealers Pipeline" />
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="5" alignment="CENTER">
+
         </VBox>
 
         <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="6"

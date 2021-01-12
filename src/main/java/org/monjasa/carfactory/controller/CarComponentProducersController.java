@@ -19,14 +19,17 @@ public class CarComponentProducersController {
 
     private final CarComponentProducersModel carComponentProducersModel;
 
+    @FXML private Label carEngineProducersCount;
     @FXML private Label carEngineWarehouseState;
     @FXML private Label carEngineWarehouseTotal;
     @FXML private Slider carEngineProducingRate;
 
+    @FXML private Label carBodyProducersCount;
     @FXML private Label carBodyWarehouseState;
     @FXML private Label carBodyWarehouseTotal;
     @FXML private Slider carBodyProducingRate;
 
+    @FXML private Label carAccessoryProducersCount;
     @FXML private Label carAccessoryWarehouseState;
     @FXML private Label carAccessoryWarehouseTotal;
     @FXML private Slider carAccessoryProducingRate;
@@ -37,7 +40,6 @@ public class CarComponentProducersController {
             Label warehouseTotal,
             Slider slider
     ) {
-
         warehouseState.textProperty().bind(
                 facilityFactory.getProductWarehouse().sizeBinding().asString()
                         .concat(" / ")
@@ -46,7 +48,7 @@ public class CarComponentProducersController {
 
         AuditableWarehouse auditableWarehouse = (AuditableWarehouse) facilityFactory.getProductWarehouse();
         warehouseTotal.textProperty().bind(
-                new SimpleStringProperty("Total: ")
+                new SimpleStringProperty(warehouseTotal.getText())
                         .concat(auditableWarehouse.auditSizeBinding().asString())
         );
 
@@ -56,6 +58,10 @@ public class CarComponentProducersController {
 
     public void initialize() {
 
+        carEngineProducersCount.setText(String.format(
+                "Engine Producers | %d",
+                carComponentProducersModel.getCarEngineFacilityFactory().getCarComponentProducersCount())
+        );
         setupProducingInfo(
                 carComponentProducersModel.getCarEngineFacilityFactory(),
                 carEngineWarehouseState,
@@ -63,6 +69,10 @@ public class CarComponentProducersController {
                 carEngineProducingRate
         );
 
+        carBodyProducersCount.setText(String.format(
+                "Body Producers | %d",
+                carComponentProducersModel.getCarBodyFacilityFactory().getCarComponentProducersCount())
+        );
         setupProducingInfo(
                 carComponentProducersModel.getCarBodyFacilityFactory(),
                 carBodyWarehouseState,
@@ -70,6 +80,10 @@ public class CarComponentProducersController {
                 carBodyProducingRate
         );
 
+        carAccessoryProducersCount.setText(String.format(
+                "Accessory Producers | %d",
+                carComponentProducersModel.getCarAccessoryFacilityFactory().getCarComponentProducersCount())
+        );
         setupProducingInfo(
                 carComponentProducersModel.getCarAccessoryFacilityFactory(),
                 carAccessoryWarehouseState,

@@ -27,11 +27,11 @@ public class CarPlantModel {
     @Getter private final LongProperty waitingTaskCount = new SimpleLongProperty();
     @Getter private final LongProperty completedTaskCount = new SimpleLongProperty();
 
-    @Value("${constructors.count}")
-    private int constructorsCount;
-
     @Value("${constructors.construction-time}")
     private int carConstructionTime;
+
+    @Value("${constructors.count}")
+    @Getter private int constructorsCount;
 
     private ThreadPoolExecutor executor;
 
