@@ -5,9 +5,12 @@ import javafx.beans.property.SimpleDoubleProperty;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.monjasa.carfactory.domain.CarComponent;
+import org.monjasa.carfactory.domain.Product;
+import org.monjasa.carfactory.model.transport.Pipeline;
 import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
 import org.monjasa.carfactory.model.warehouse.ScheduledWarehouse;
 import org.monjasa.carfactory.service.component.CarComponentFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,8 +19,10 @@ public class CarComponentProducer<T extends CarComponent> implements ProductProd
 
     @NonNull private final CarComponentFactory<T> carComponentFactory;
     @NonNull private final ProductWarehouse<T> carComponentWarehouse;
+    @NonNull private final Pipeline pipeline = Pipeline.getInstance();
 
     private final DoubleProperty producingRate = new SimpleDoubleProperty(1.0);
+
 
     @Override
     public void startProducing() {
@@ -28,7 +33,9 @@ public class CarComponentProducer<T extends CarComponent> implements ProductProd
             @Override
             public void run() {
                 try {
-                    carComponentWarehouse.supplyProduct(carComponentFactory.createCarComponent(), CarComponentProducer.this);
+                    CarComponent component = carComponentFactory.createCarComponent();
+                    pipeline.addProduct(component);
+                    carComponentWarehouse.supplyProduct((T) component, CarComponentProducer.this);
                 } catch (InterruptedException exception) {
                     exception.printStackTrace();
                 } finally {

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.monjasa.carfactory.controller.MainSceneController"
-            prefHeight="400.0" prefWidth="800.0">
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.monjasa.carfactory.controller.MainSceneController">
 
     <HBox>
         <VBox>
@@ -20,24 +19,19 @@
                 <Label text="Engine Warehouse" />
                 <Label fx:id="carEngineWarehouseTotal" />
                 <Label fx:id="carEngineWarehouseState" />
-                <Slider fx:id="carEngineProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
-                        min="1.0"
-                        max="5.0" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="carEngineProducingRate" blockIncrement="0.25" majorTickUnit="1.0" max="5.0" min="1.0" showTickLabels="true" showTickMarks="true" value="3.0" />
             </VBox>
             <VBox alignment="CENTER">
                 <Label text="Body Warehouse" />
                 <Label fx:id="carBodyWarehouseTotal" />
                 <Label fx:id="carBodyWarehouseState" />
-                <Slider fx:id="carBodyProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
-                        min="1.0"
-                        max="5.0" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="carBodyProducingRate" blockIncrement="0.25" majorTickUnit="1.0" max="5.0" min="1.0" showTickLabels="true" showTickMarks="true" value="3.0" />
             </VBox>
             <VBox alignment="CENTER">
                 <Label text="Accessory Warehouse" />
                 <Label fx:id="carAccessoryWarehouseTotal" />
                 <Label fx:id="carAccessoryWarehouseState" />
-                <Slider fx:id="carAccessoryProducingRate" value="3.0" blockIncrement="0.25" majorTickUnit="1.0"
-                        min="1.0" max="5.0" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="carAccessoryProducingRate" blockIncrement="0.25" majorTickUnit="1.0" max="5.0" min="1.0" showTickLabels="true" showTickMarks="true" value="3.0" />
             </VBox>
         </VBox>
         <VBox>
@@ -59,8 +53,9 @@
                 <Insets topRightBottomLeft="10" />
             </padding>
             <Label text="Car Dealers" />
-            <Slider fx:id="carRequestingRate" value="5.0" blockIncrement="0.50" majorTickUnit="1.0" minorTickCount="1"
-                    min="1.0" max="10.0" showTickLabels="true" showTickMarks="true" />
+            <Slider fx:id="carRequestingRate" blockIncrement="0.50" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" value="5.0" />
         </VBox>
     </HBox>
+
+    <fx:include fx:id="firstPipeline" source="PipelineController.fxml"/>
 </AnchorPane>

@@ -9,9 +9,11 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.monjasa.carfactory.domain.Car;
 import org.monjasa.carfactory.domain.CarComponent;
 import org.monjasa.carfactory.model.*;
+import org.monjasa.carfactory.model.transport.Pipeline;
 import org.monjasa.carfactory.model.warehouse.AuditableWarehouse;
 import org.monjasa.carfactory.model.warehouse.ProductWarehouse;
 import org.monjasa.carfactory.service.facility.AbstractFacilityFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -42,6 +44,12 @@ public class MainSceneController {
 
     @FXML private Slider carRequestingRate;
 
+    @Autowired
+    private PipelineController firstPipelineController;
+
+    //@Autowired
+    private Pipeline firstPipeline = Pipeline.getInstance();
+
     private void setupProducingInfo(
             AbstractFacilityFactory<? extends CarComponent> facilityFactory,
             Label warehouseState,
@@ -66,6 +74,9 @@ public class MainSceneController {
     }
 
     public void initialize() {
+
+        firstPipelineController.setPipeline(firstPipeline);
+
 
         setupProducingInfo(
                 carComponentProducersModel.getCarEngineFacilityFactory(),
