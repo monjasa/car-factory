@@ -24,6 +24,13 @@ public class CarDealersModel {
     @Getter private ProductWarehouse<Car> carWarehouse;
     @Getter private List<CarDealer> carDealers;
 
+    private Pipeline pipeline;
+
+    @Resource(name = "dealerPipeline")
+    public void setPipeline(Pipeline pipeline) {
+        this.pipeline = pipeline;
+    }
+
     @PostConstruct
     private void initializeModel() {
 

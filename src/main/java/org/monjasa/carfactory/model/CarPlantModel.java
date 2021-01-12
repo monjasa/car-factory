@@ -30,6 +30,9 @@ public class CarPlantModel {
     @Value("${constructors.construction-time}")
     private int carConstructionTime;
 
+
+    private Pipeline pipeline;
+
     @Value("${constructors.count}")
     @Getter private int constructorsCount;
 

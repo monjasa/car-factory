@@ -25,6 +25,12 @@ public class CarEngineFacilityFactory implements AbstractFacilityFactory<CarEngi
     @Getter private CarComponentFactory<CarEngine> carComponentFactory;
     @Getter private ProductWarehouse<CarEngine> productWarehouse;
     @Getter private List<CarComponentProducer<CarEngine>> carComponentProducers;
+    @Getter private Pipeline pipeline;
+
+    @Resource(name = "enginePipeline")
+    public void setEnginePipeline(Pipeline enginePipeline) {
+        this.pipeline = enginePipeline;
+    }
 
     @PostConstruct
     private void initializeService() {

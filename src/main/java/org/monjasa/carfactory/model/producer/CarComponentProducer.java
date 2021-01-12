@@ -15,9 +15,12 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class CarComponentProducer<T extends CarComponent> implements ProductProducer<T> {
 
-    @NonNull private final CarComponentFactory<T> carComponentFactory;
-    @NonNull private final ProductWarehouse<T> carComponentWarehouse;
-    @NonNull private final Pipeline pipeline = Pipeline.getInstance();
+    @NonNull
+    private final CarComponentFactory<T> carComponentFactory;
+    @NonNull
+    private final ProductWarehouse<T> carComponentWarehouse;
+    @NonNull
+    private final Pipeline pipeline;
 
     private final DoubleProperty producingRate = new SimpleDoubleProperty(1.0);
 
