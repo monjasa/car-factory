@@ -50,16 +50,6 @@ public class ObservableBlockingQueue<E> extends ObservableListBase<E> implements
 
     @Override
     public void put(E e) throws InterruptedException {
-       /* backingBlockingQueue.put(e);
-        Platform.runLater(() -> {
-
-                    beginChange();
-                    nextAdd(backingBlockingQueue.size() - 1, backingBlockingQueue.size());
-                    endChange();
-        });
-        */
-
-
 
         Object o1 = new Object();
 

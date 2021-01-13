@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.*?>
-<?import org.monjasa.carfactory.controller.pipeline.PipelineBox?>
+<?import org.monjasa.carfactory.controller.PipelineControllerBox?>
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.monjasa.carfactory.controller.MainSceneController"
@@ -32,15 +32,15 @@
         </padding>
 
         <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER" styleClass="productPipeline">
-            <PipelineBox iconSize="50" minWidth="100" minHeight="15" fx:id="enginePipelineBox" />
+            <PipelineControllerBox iconSize="50" minWidth="100" minHeight="15" fx:id="enginePipelineController" />
         </VBox>
 
         <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER" styleClass="productPipeline">
-            <PipelineBox iconSize="50" minWidth="100" minHeight="15" fx:id="bodyPipelineBox" />
+            <PipelineControllerBox iconSize="50" minWidth="100" minHeight="15" fx:id="bodyPipelineController" />
         </VBox>
 
         <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="CENTER" styleClass="productPipeline">
-            <PipelineBox iconSize="50" minWidth="100" minHeight="15" fx:id="accessoryPipelineBox" />
+            <PipelineControllerBox iconSize="50" minWidth="100" minHeight="15" fx:id="accessoryPipelineController" />
         </VBox>
 
         <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="1"
@@ -49,15 +49,17 @@
         <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="2"
                     source="CarPlantController.fxml" />
 
-        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="3" alignment="CENTER" styleClass="productPipeline">
-            <PipelineBox iconSize="120" minWidth="100" minHeight="15" fx:id="carPipelineBox" />
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="3" alignment="CENTER"
+              styleClass="productPipeline">
+            <PipelineControllerBox iconSize="120" minWidth="100" minHeight="15" fx:id="carPipelineController" />
         </VBox>
 
         <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="4"
                     source="CarWarehouseController.fxml" />
 
-        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="5" alignment="CENTER" styleClass="productPipeline">
-            <PipelineBox iconSize="120" minWidth="100" minHeight="15" fx:id="dealerPipelineBox" />
+        <VBox GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="5" alignment="CENTER"
+              styleClass="productPipeline">
+            <PipelineControllerBox iconSize="120" minWidth="100" minHeight="15" fx:id="dealerPipelineController" />
         </VBox>
 
         <fx:include GridPane.rowIndex="0" GridPane.rowSpan="3" GridPane.columnIndex="6"

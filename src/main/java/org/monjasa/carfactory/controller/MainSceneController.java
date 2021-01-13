@@ -2,7 +2,6 @@ package org.monjasa.carfactory.controller;
 
 import javafx.fxml.FXML;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.monjasa.carfactory.controller.pipeline.PipelineBox;
 import org.monjasa.carfactory.model.transport.Pipeline;
 import org.springframework.stereotype.Component;
 
@@ -13,15 +12,15 @@ import javax.annotation.Resource;
 public class MainSceneController {
 
     @FXML
-    PipelineBox enginePipelineBox;
+    PipelineControllerBox enginePipelineController;
     @FXML
-    PipelineBox bodyPipelineBox;
+    PipelineControllerBox bodyPipelineController;
     @FXML
-    PipelineBox accessoryPipelineBox;
+    PipelineControllerBox accessoryPipelineController;
     @FXML
-    PipelineBox carPipelineBox;
+    PipelineControllerBox carPipelineController;
     @FXML
-    PipelineBox dealerPipelineBox;
+    PipelineControllerBox dealerPipelineController;
 
     Pipeline enginePipeline;
     Pipeline bodyPipeline;
@@ -55,11 +54,11 @@ public class MainSceneController {
     }
 
     public void initialize() {
-        enginePipelineBox.setPipeline(enginePipeline);
-        bodyPipelineBox.setPipeline(bodyPipeline);
-        accessoryPipelineBox.setPipeline(accessoryPipeline);
+        enginePipelineController.setPipeline(enginePipeline);
+        bodyPipelineController.setPipeline(bodyPipeline);
+        accessoryPipelineController.setPipeline(accessoryPipeline);
 
-        carPipelineBox.setPipeline(carPipeline);
-        dealerPipelineBox.setPipeline(dealerPipeline);
+        carPipelineController.setPipeline(carPipeline);
+        dealerPipelineController.setPipeline(dealerPipeline);
     }
 }

@@ -1,6 +1,7 @@
 package org.monjasa.carfactory.config;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -22,10 +23,9 @@ public final class PrimaryStageInitializer implements ApplicationListener<StageR
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
         Stage stage = event.stage;
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/assets/images/car-product-icon.png")));
         Scene mainScene = new Scene(fxWeaver.loadView(MainSceneController.class), 1600, 900);
         stage.setScene(mainScene);
         stage.show();
     }
-
-
 }
